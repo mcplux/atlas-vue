@@ -13,10 +13,10 @@ const toggleSidebar = () => {
 
 <template>
   <!-- Screen -->
-  <div class="bg-orange-200 min-h-screen">
+  <div class="bg-orange-200 min-h-screen flex">
     <!-- Sidebar -->
     <aside
-      class="fixed bg-orange-100 w-64 lg:w-96 h-screen z-10 transform transition-transform"
+      class="fixed lg:static bg-orange-100 w-64 lg:w-96 h-screen z-10 transform transition-transform"
       :class="[isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
     >
       Sidebar
@@ -26,23 +26,31 @@ const toggleSidebar = () => {
     <div
       v-if="isSidebarOpen"
       @click="closeSidebar"
-      class="fixed inset-0 bg-black/40 backdrop-blur-xs"
+      class="fixed inset-0 bg-black/40 backdrop-blur-xs lg:hidden"
     />
 
     <!-- Main content div -->
-    <div class="px-5 pt-10 container mx-auto">
-      <!-- Header -->
-      <header class="flex justify-between">
-        <button @click="toggleSidebar">
-          <Bars3BottomLeftIcon class="size-8" />
-        </button>
-        <button>
-          <Cog6ToothIcon class="size-8" />
-        </button>
-      </header>
+    <div
+      class="px-5 pt-10 w-full transition-all"
+      :class="[isSidebarOpen ? 'lg:ml-0' : 'lg:-ml-96']"
+    >
+      <!-- Container -->
+      <div class="container mx-auto">
+        <!-- Header -->
+        <header class="flex justify-between">
+          <button @click="toggleSidebar">
+            <Bars3BottomLeftIcon class="size-8" />
+          </button>
+          <button>
+            <Cog6ToothIcon class="size-8" />
+          </button>
+        </header>
 
-      <!-- Main content -->
-      <main class="mt-10">Main</main>
+        <!-- Main content -->
+        <main class="mt-10">
+          <RouterView />
+        </main>
+      </div>
     </div>
   </div>
 </template>
