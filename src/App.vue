@@ -31,7 +31,7 @@ const toggleSidebar = () => {
 
     <!-- Main content div -->
     <div
-      class="px-5 pt-10 w-full transition-all"
+      class="px-5 pt-10 w-full transition-all max-h-screen overflow-auto"
       :class="[isSidebarOpen ? 'lg:ml-0' : 'lg:-ml-96']"
     >
       <!-- Container -->
