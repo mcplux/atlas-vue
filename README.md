@@ -1,54 +1,34 @@
-# atlas-vue
+# Atlas Vue
 
-This template should help get you started developing with Vue 3 in Vite.
+## Run in development
 
-## Recommended IDE Setup
+### Requirements
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node (v24.13)
 
-## Recommended Browser Setup
+### Steps
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+1. Clone the repo.
 
-## Type Support for `.vue` Imports in TS
+   ```bash
+   git clone https://github.com/mcplux/atlas-vue.git && cd atlas-vue
+   ```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+2. Make sure you're using the correct node version using a version manager or manually 24.13
 
-## Customize configuration
+   ```bash
+   fnm install # fnm
+   nvm install $(cat .node-version) # nvm install 24.13
+   ```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+3. Install dependencies
 
-## Project Setup
+   ```
+   npm install
+   ```
 
-```sh
-npm install
-```
+4. Run the project locally
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+   ```
+   npm run dev
+   ```
