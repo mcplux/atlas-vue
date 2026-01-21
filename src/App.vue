@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { Bars3BottomLeftIcon, Cog6ToothIcon } from '@heroicons/vue/16/solid'
 import { ref } from 'vue'
+import { Bars3BottomLeftIcon, Cog6ToothIcon, MagnifyingGlassIcon } from '@heroicons/vue/16/solid'
 
 const isSidebarOpen = ref(false)
+
 const closeSidebar = () => {
   isSidebarOpen.value = false
 }
+
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value
 }
@@ -16,10 +18,20 @@ const toggleSidebar = () => {
   <div class="min-h-screen flex bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-gray-600">
     <!-- Sidebar -->
     <aside
-      class="fixed lg:static bg-orange-100 w-64 lg:w-96 h-screen z-10 transform transition-transform"
+      class="fixed lg:static bg-orange-100 w-64 lg:w-96 h-screen z-10 transform transition-transform rounded-r-lg flex flex-col"
       :class="[isSidebarOpen ? 'translate-x-0' : '-translate-x-full']"
     >
-      Sidebar
+      <div class="w-full border-b py-5 px-10 flex justify-center items-end">
+        <button
+          class="flex justify-between border rounded w-full p-2 cursor-pointer hover:bg-orange-200 transition-colors"
+        >
+          Filter
+          <MagnifyingGlassIcon class="size-6" />
+        </button>
+      </div>
+      <div class="flex-1 overflow-auto p-5">
+        <p class="text-4xl truncate">Hello world!</p>
+      </div>
     </aside>
 
     <!-- Overlay (mobile only) -->
