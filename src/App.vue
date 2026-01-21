@@ -13,7 +13,7 @@ const toggleSidebar = () => {
 
 <template>
   <!-- Screen -->
-  <div class="bg-orange-200 min-h-screen flex">
+  <div class="min-h-screen flex bg-[url('/bg.jpeg')] bg-cover bg-center bg-no-repeat text-gray-600">
     <!-- Sidebar -->
     <aside
       class="fixed lg:static bg-orange-100 w-64 lg:w-96 h-screen z-10 transform transition-transform"
@@ -39,10 +39,10 @@ const toggleSidebar = () => {
         <!-- Header -->
         <header class="flex justify-between">
           <button @click="toggleSidebar">
-            <Bars3BottomLeftIcon class="size-8" />
+            <Bars3BottomLeftIcon class="size-10" />
           </button>
           <button>
-            <Cog6ToothIcon class="size-8" />
+            <Cog6ToothIcon class="size-10" />
           </button>
         </header>
 
