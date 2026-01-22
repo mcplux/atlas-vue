@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Bars3BottomLeftIcon, Cog6ToothIcon, MagnifyingGlassIcon } from '@heroicons/vue/16/solid'
+import CountriesList from './components/CountriesList.vue'
 
 const isSidebarOpen = ref(false)
 
@@ -30,7 +31,7 @@ const toggleSidebar = () => {
         </button>
       </div>
       <div class="flex-1 overflow-auto p-5">
-        <p class="text-4xl truncate">Hello world!</p>
+        <CountriesList />
       </div>
     </aside>
 
@@ -43,11 +44,11 @@ const toggleSidebar = () => {
 
     <!-- Main content div -->
     <div
-      class="px-5 pt-10 w-full transition-all max-h-screen overflow-auto"
+      class="w-full transition-all max-h-screen overflow-auto"
       :class="[isSidebarOpen ? 'lg:ml-0' : 'lg:-ml-96']"
     >
       <!-- Container -->
-      <div class="container mx-auto">
+      <div class="container mx-auto px-5 pt-10 flex flex-col h-full">
         <!-- Header -->
         <header class="flex justify-between">
           <button @click="toggleSidebar">
@@ -59,7 +60,7 @@ const toggleSidebar = () => {
         </header>
 
         <!-- Main content -->
-        <main class="mt-10">
+        <main class="flex-1">
           <RouterView />
         </main>
       </div>
