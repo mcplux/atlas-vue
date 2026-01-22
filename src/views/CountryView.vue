@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { getCountryAction } from '@/actions/get-country.action'
 import type { Country } from '@/types/country.type'
-import { onMounted, ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const name = route.params.name as string
 
 const country = ref<Country | null>(null)
 
@@ -15,17 +14,21 @@ const formatCurrencies = (currencies: Country['currencies']): string => {
     .join(', ')
 }
 
-onMounted(async () => {
-  country.value = (await getCountryAction(name)) ?? null
-})
+watch(
+  () => route.params.name,
+  async (newName) => {
+    country.value = (await getCountryAction(newName as string)) ?? null
+  },
+  { immediate: true },
+)
 </script>
 
 <template>
-  <p v-if="!country">Country with name {{ name }} not found</p>
+  <p v-if="!country">Country with name {{ route.params.name }} not found</p>
 
   <div
     v-else
-    class="h-full flex flex-col lg:flex-row-reverse pt-5 md:pt-0 items-start lg:items-center gap-10 lg:px-10"
+    class="h-full flex flex-col lg:flex-row-reverse pt-5 lg:pt-0 items-start lg:items-center gap-10 lg:px-10"
   >
     <div class="flex flex-col items-center border lg:w-1/2">
       <img :src="country.flags.svg" :alt="country.flags.alt" class="w-full" />
