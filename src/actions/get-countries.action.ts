@@ -1,5 +1,5 @@
 import restcountriesApi from '@/api/rescountries.api'
-import type { Country } from '@/types/coutry.type'
+import type { Country } from '@/types/country.type'
 
 export const getCountriesAction = async () => {
   try {

@@ -1,42 +1,62 @@
 <script setup lang="ts">
+import { getCountryAction } from '@/actions/get-country.action'
+import type { Country } from '@/types/country.type'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const name = route.params.name as string
+
+const country = ref<Country | null>(null)
+
+const formatCurrencies = (currencies: Country['currencies']): string => {
+  return Object.entries(currencies)
+    .map(([code, { name, symbol }]) => `${name} (${code}, ${symbol})`)
+    .join(', ')
+}
+
+onMounted(async () => {
+  country.value = (await getCountryAction(name)) ?? null
+})
 </script>
 
 <template>
+  <p v-if="!country">Country with name {{ name }} not found</p>
+
   <div
+    v-else
     class="h-full flex flex-col lg:flex-row-reverse pt-5 md:pt-0 items-start lg:items-center gap-10 lg:px-10"
   >
     <div class="flex flex-col items-center border lg:w-1/2">
-      <img src="https://flagcdn.com/ag.svg" alt="Antigua and Barbuda" class="w-full" />
+      <img :src="country.flags.svg" :alt="country.flags.alt" class="w-full" />
       <p class="w-full text-center text-lg py-2 font-bold">Flag</p>
     </div>
 
     <div class="flex-1 lg:w-1/2">
-      <h1 class="text-2xl lg:text-4xl uppercase font-bold">Antigua and Barbuda</h1>
+      <h1 class="text-2xl lg:text-4xl uppercase font-bold">{{ country.name.common }}</h1>
       <div class="mt-10 flex flex-col gap-3">
         <p class="text-bold text-xl font-semibold">
-          Official Name: <span class="font-normal">Antigua and Barbuda</span>
+          Official Name: <span class="font-normal">{{ country.name.official }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Capital: <span class="font-normal">Saint John's</span>
+          Capital: <span class="font-normal">{{ country.capital.join(', ') }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Continent: <span class="font-normal">Americas</span>
+          Continent: <span class="font-normal">{{ country.continents.join(', ') }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Region: <span class="font-normal">Caribbean</span>
+          Region: <span class="font-normal">{{ country.region }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Languages: <span class="font-normal">English</span>
+          Languages:
+          <span class="font-normal">{{ Object.values(country.languages).join(', ') }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Population: <span class="font-normal">103603</span>
+          Population: <span class="font-normal">{{ country.population.toLocaleString() }}</span>
         </p>
         <p class="text-bold text-xl font-semibold">
-          Currency: <span class="font-normal">Eastern Caribbean dollar (XCD)</span>
+          Currency:
+          <span class="font-normal">{{ formatCurrencies(country.currencies) }}</span>
         </p>
       </div>
     </div>

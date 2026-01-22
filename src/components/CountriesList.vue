@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { getCountriesAction } from '@/actions/get-countries.action'
-import type { Country } from '@/types/coutry.type'
+import type { Country } from '@/types/country.type'
 
 const countries = ref<Country[]>([])
 
