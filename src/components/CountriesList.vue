@@ -14,7 +14,7 @@ onMounted(async () => {
   <ul>
     <li v-for="country in countries" :key="`${country.flag} ${country.name.common}`">
       <RouterLink
-        :to="{ name: 'countries' }"
+        :to="{ name: 'country', params: { name: country.name.common } }"
         class="block p-2 hover:bg-orange-200 rounded truncate"
       >
         {{ `${country.flag} ${country.name.common}` }}
