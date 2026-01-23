@@ -1,25 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useSearchStore } from '@/stores/search.store'
 
-const modalOpen = ref(true)
-
-const closeModal = () => {
-  modalOpen.value = false
-}
-
-const openModal = () => {
-  modalOpen.value = true
-}
-
-defineExpose({
-  openModal,
-})
+const searchStore = useSearchStore()
 </script>
 
 <template>
   <div
-    v-if="modalOpen"
-    @click="closeModal"
+    v-if="searchStore.isModalOpen"
+    @click="searchStore.closeModal"
     class="fixed inset-0 bg-black/50 flex items-center justify-center z-30 backdrop-blur-xs"
   >
     <div @click.stop class="bg-orange-100 rounded-xl shadow-lg w-full max-w-2xl p-6 mx-5 relative">

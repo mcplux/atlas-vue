@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { useSidebarStore } from '@/stores/sidebar.store'
-
 import { MagnifyingGlassIcon } from '@heroicons/vue/16/solid'
+import { useSidebarStore } from '@/stores/sidebar.store'
+import { useSearchStore } from '@/stores/search.store'
 import CountriesList from './CountriesList.vue'
 
 const sidebarStore = useSidebarStore()
+const searchStore = useSearchStore()
 </script>
 
 <template>
@@ -16,7 +17,7 @@ const sidebarStore = useSidebarStore()
     <div class="w-full border-b py-5 px-10 flex justify-center items-end">
       <button
         class="flex justify-between border rounded w-full p-2 cursor-pointer hover:bg-orange-200 transition-colors"
-        @click="console.log('hello world')"
+        @click="searchStore.openModal"
       >
         Filter
         <MagnifyingGlassIcon class="size-6" />
