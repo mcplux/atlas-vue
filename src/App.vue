@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { Bars3BottomLeftIcon, Cog6ToothIcon, MagnifyingGlassIcon } from '@heroicons/vue/16/solid'
 import CountriesList from './components/CountriesList.vue'
+import SearchModal from './components/SearchModal.vue'
 
 const isSidebarOpen = ref(false)
+const searchModelRef = ref<InstanceType<typeof SearchModal> | null>(null)
 
 const closeSidebar = () => {
   isSidebarOpen.value = false
@@ -25,6 +27,7 @@ const toggleSidebar = () => {
       <div class="w-full border-b py-5 px-10 flex justify-center items-end">
         <button
           class="flex justify-between border rounded w-full p-2 cursor-pointer hover:bg-orange-200 transition-colors"
+          @click="searchModelRef?.openModal"
         >
           Filter
           <MagnifyingGlassIcon class="size-6" />
@@ -65,5 +68,7 @@ const toggleSidebar = () => {
         </main>
       </div>
     </div>
+
+    <SearchModal ref="searchModelRef" />
   </div>
 </template>
