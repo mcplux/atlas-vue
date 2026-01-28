@@ -4,8 +4,8 @@
 
 <style scoped>
 .loader {
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #555;
   border-bottom-color: transparent;
   border-radius: 50%;
