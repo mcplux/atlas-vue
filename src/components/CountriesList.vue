@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { getCountriesAction } from '@/actions/get-countries.action'
-import type { Country } from '@/types/country.type'
+import { onMounted } from 'vue'
+import { useCountriesStore } from '@/stores/countries.store'
 
-const countries = ref<Country[]>([])
+const countriesStore = useCountriesStore()
 
-onMounted(async () => {
-  countries.value = (await getCountriesAction()) ?? []
+onMounted(() => {
+  countriesStore.getCountries()
 })
 </script>
 
 <template>
   <ul>
-    <li v-for="country in countries" :key="`${country.flag} ${country.name.common}`">
+    <li v-for="country in countriesStore.countries" :key="`${country.flag} ${country.name.common}`">
       <RouterLink
         :to="{ name: 'country', params: { name: country.name.common } }"
         class="block p-2 hover:bg-orange-200 rounded truncate"
