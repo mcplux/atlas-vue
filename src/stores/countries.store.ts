@@ -40,10 +40,45 @@ export const useCountriesStore = defineStore('countries', () => {
     }
   }
 
+  const cleanStr = (str: string): string => {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]/g, '')
+  }
+
+  const filterData = (query: string): Country[] => {
+    const cleanedQuery = cleanStr(query)
+
+    return countries.value.filter((country) => {
+      const { name } = country
+      if (cleanStr(name.common).includes(cleanedQuery)) {
+        return country
+      }
+
+      if (cleanStr(name.official).includes(cleanedQuery)) {
+        return country
+      }
+
+      for (const lang in name.nativeName) {
+        const nativeName = name.nativeName[lang]!
+        if (cleanStr(nativeName.common).includes(cleanedQuery)) {
+          return country
+        }
+
+        if (cleanStr(nativeName.official).includes(cleanedQuery)) {
+          return country
+        }
+      }
+    })
+  }
+
   return {
     countries,
     country,
     getCountries,
     getCountry,
+    filterData,
   }
 })
